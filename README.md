@@ -1,60 +1,130 @@
-<<<<<<< HEAD
-# Chat_App_Deployment_Kubernetes
-=======
-## 📝 Introduction:
+# 💬 Chat App Deployment on Kubernetes
 
-This project aims to provide a real-time chat experience that's both scalable and secure. With a focus on modern technologies, we're building an application that's easy to use and maintain.
+## 📝 Introduction
 
+This project delivers a real-time chat application designed to be scalable, secure, and modern. It uses modern technologies to provide a smooth user experience and easy maintenance.
 
-## Detailed Workflow Description:
+---
 
+## 🏗️ Architecture Overview
 
-![image](https://github.com/user-attachments/assets/f845a188-8e70-42f7-8577-30af38e83053)
+### 🔹 User Interaction
+Users interact with the frontend through a web browser. They can:
+- Log in
+- Send messages
+- Navigate the chat interface
 
+---
 
-  - **User Interaction:**
-    - Users interact with the frontend application running in their browser. This includes actions like logging in, sending messages, and navigating through the chat interface.Frontend (React App):The frontend is responsible for rendering the user interface and handling user inputs.It communicates with the backend via HTTP requests (for RESTful APIs) and WebSocket connections (for real-time interactions).
+### 🔹 Frontend (React + TailwindCSS)
+- Handles UI rendering and user inputs
+- Communicates with backend using:
+  - HTTP (REST APIs)
+  - WebSockets (Socket.io) for real-time updates
 
-    - **Backend (Node.js/Express + Socket.io):**
-       - The backend handles all the server-side logic.It processes API requests from the frontend to perform actions such as user authentication, message retrieval, and message storage.Socket.io is used to manage real-time bi-directional communication between the frontend and the backend. This allows for instant messaging features, such as showing when users are typing or when new messages are sent.
+---
 
+### 🔹 Backend (Node.js + Express + Socket.io)
+- Handles server-side logic
+- Processes API requests:
+  - Authentication (JWT)
+  - Message handling
+- Enables real-time communication:
+  - Typing indicators
+  - Instant messaging
 
-    - **MongoDB (Database):**
-       - MongoDB stores all persistent data for the application, including user profiles, chat messages, and any other relevant data.The backend interacts with MongoDB to retrieve, add, update, or delete data based on the requests it receives from the frontend.
+---
 
+### 🔹 Database (MongoDB)
+- Stores:
+  - User data
+  - Messages
+  - Application data
+- Backend performs CRUD operations
 
+---
 
+## ✨ Features
 
-## ✨ Features:
+- ⚡ Real-time Messaging (Socket.io)
+- 🔐 User Authentication & Authorization (JWT)
+- 📈 Scalable Architecture
+- 🎨 Modern UI (React + TailwindCSS + DaisyUI)
+- 👤 Profile Management
+- 🟢 Online/Offline Status
 
+---
 
-* **Real-time Messaging**: Send and receive messages instantly using Socket.io 
-* **User Authentication & Authorization**: Securely manage user access with JWT 
-* **Scalable & Secure Architecture**: Built to handle large volumes of traffic and data 
-* **Modern UI Design**: A user-friendly interface crafted with React and TailwindCSS 
-* **Profile Management**: Users can upload and update their profile pictures 
-* **Online Status**: View real-time online/offline status of users 
+## 🛠️ Tech Stack
 
+- **Frontend:** React, TailwindCSS, DaisyUI
+- **Backend:** Node.js, Express, Socket.io
+- **Database:** MongoDB
+- **State Management:** Zustand
+- **Authentication:** JWT
+- **Containerization:** Docker
+- **Orchestration:** Kubernetes
+- **Web Server:** Nginx
 
-## 🛠️ Tech Stack:
+---
 
+## 🔧 Prerequisites
 
-* **Backend:** Node.js, Express, MongoDB, Socket.io
-* **Frontend:** React, TailwindCSS
-* **Containerization:** Docker
-* **Orchestration:** Kubernetes (planned)
-* **Web Server:** Nginx
-* **State Management:** Zustand
-* **Authentication:** JWT
-* **Styling Components:** DaisyUI
+Make sure you have installed:
 
+- Docker → https://www.docker.com/get-started  
+- Git → https://git-scm.com/downloads  
+- kubectl → https://kubernetes.io/docs/tasks/tools/  
+- Minikube → https://minikube.sigs.k8s.io/docs/start/
 
-## 🔧 Prerequisites:
+---
 
+## 🚀 Setup & Deployment
 
-* **[Docker](https://www.docker.com/get-started)** (for containerizing the app)
-* **[Git](https://git-scm.com/downloads)** (to clone the repository)
-* **[kubectl](https://kubernetes.io/docs/tasks/tools/)** (Kubernetes CLI)
-* **[Minikube](https://minikube.sigs.k8s.io/docs/start/)** (to run a local Kubernetes cluster)
-     
+### 1. Start Minikube
+
+```bash
+minikube start --driver=docker
+```
+
+### 2. Deploy the Application
+
+```bash
+cd k8s
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### 3. Verify Deployment
+
+```bash
+kubectl get pods -n chat-app
+kubectl get svc -n chat-app
+```
+
+---
+
+## 🌐 Access the Application
+
+### Port Forwarding
+
+#### Frontend
+
+```bash
+kubectl port-forward svc/frontend 80:80 -n chat-app &
+```
+
+#### Backend
+
+```bash
+kubectl port-forward svc/backend 5001:5001 -n chat-app &
+```
+
+### 🌍 Open in Browser
+
+```
+http://localhost:80
+```
+
+---
 
